@@ -1,48 +1,64 @@
 @model TAREA___CRUD_CON_EF.ViewModel.MascotaVM
 @{
-    ViewData["Title"] = "Registro";
+    ViewData["Title"] = "Registro de Mascotas";
 }
 
 <div class="container">
-    <h1 style="text-align: center; color: yellowgreen;">@ViewData["Message"]</h1>
-
+    @if (TempData["Message"] != null)
+    {
+        <h1 style="text-align: center; color: yellowgreen;">@TempData["Message"]</h1>
+    }
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
 
     <div class="row">
         <!-- Primera Columna: Formulario -->
-        <div class="col-md-6">
-                <h1 style="text-align: center;">Registro Mascotas</h1>
-            <form asp-controller="Mascota" asp-action="Insertar" method="post">
+        <div class="col-md-4">
+            <h1 style="text-align: center;">@ViewData["Accion"] Mascota</h1>
+            <form asp-controller="Mascota" asp-action="@(Model.FormMascota.Id == 0 ? "Insertar" : "Modificar")" method="post">
+                <input type="hidden" asp-for="FormMascota.Id" />
                 <div class="form-group">
                     <label asp-for="FormMascota.Nombre" class="control-label"></label>
                     <input asp-for="FormMascota.Nombre" class="form-control" />
+                    <span asp-validation-for="FormMascota.Nombre" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="FormMascota.Raza" class="control-label"></label>
                     <input asp-for="FormMascota.Raza" class="form-control" />
+                    <span asp-validation-for="FormMascota.Raza" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="FormMascota.Color" class="control-label"></label>
                     <input asp-for="FormMascota.Color" class="form-control" />
+                    <span asp-validation-for="FormMascota.Color" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="FormMascota.FechaNacimiento" class="control-label"></label>
                     <input asp-for="FormMascota.FechaNacimiento" class="form-control" type="date" />
+                    <span asp-validation-for="FormMascota.FechaNacimiento" class="text-danger"></span>
                 </div>
-                <div class="form-group d-grid gap-2  py-2">
-
-                  <button class="btn btn-primary" type="submit">Guardar</button>
-
+                <div class="form-group d-grid gap-2 py-2">
+                    <button class="btn btn-primary" type="submit">@ViewData["Accion"]</button>
                 </div>
-
             </form>
         </div>
 
         <!-- Segunda Columna: Tabla de Mascotas -->
-        <div class="col-md-6">
-            <h1 style="text-align: center;">Lista</h1>
+        <div class="col-md-8">
+            <h1 style="text-align: center;">Lista de Mascotas</h1>
             <table class="table table-sm">
                 <thead>
                     <tr>
+                        <th style="text-align: center;">ID</th>
                         <th style="text-align: center;">Nombre</th>
                         <th style="text-align: center;">Raza</th>
                         <th style="text-align: center;">Color</th>
@@ -54,13 +70,16 @@
                     @foreach (var item in Model.ListMascota)
                     {
                         <tr>
-                            <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Nombre)</td>
-                            <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Raza)</td>
-                            <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Color)</td>
+                            <td style="text-align: center;">@item.Id</td>
+                            <td style="text-align: center;">@item.Nombre</td>
+                            <td style="text-align: center;">@item.Raza</td>
+                            <td style="text-align: center;">@item.Color</td>
                             <td style="text-align: center;">@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
                             <td style="text-align: center;">
-                                <a asp-controller="Mascota" asp-action="Editar" asp-route-id="@item.Id" class="btn btn-warning">Modificar</a>
-                                <a asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                                <a asp-controller="Mascota" asp-action="Editar" asp-route-id="@item.Id"
+                                    class="btn btn-warning">Modificar</a>
+                                <a asp-controller="Mascota" asp-action="Eliminar" asp-route-id="@item.Id"
+                                    class="btn btn-danger">Eliminar</a>
                             </td>
                         </tr>
                     }
@@ -69,3 +88,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
