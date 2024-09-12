@@ -121,6 +121,7 @@ C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.RazorAssemblyInfo.cache
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.RazorAssemblyInfo.cs
+C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.sourcelink.json
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\staticwebassets\msbuild.TAREA - CRUD CON EF.Microsoft.AspNetCore.StaticWebAssets.props
@@ -137,4 +138,3 @@ C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.pdb
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.genruntimeconfig.cache
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\ref\TAREA - CRUD CON EF.dll
-C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.sourcelink.json
