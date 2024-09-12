@@ -11,7 +11,6 @@ namespace TAREA___CRUD_CON_EF.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        
         public string? Nombre { get; set; }
         public string? Raza { get; set; }
         public string? Color { get; set; }
