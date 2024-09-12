@@ -1,0 +1,54 @@
+
+@model TAREA___CRUD_CON_EF.ViewModel.MascotaVM
+@{
+    ViewData["Title"] = "Registro";
+}
+<h1 style="text-align: center; color: yellowgreen;">@ViewData["Message"]</h1>
+<h1 style="text-align: center;"> Formulario de Registro</h1>
+<form asp-controller="Mascota" asp-action="Insertar" method="post">
+    <div class="form-group">
+        <label asp-for="FormMascota.Nombre" class="control-label"></label>
+        <input asp-for="FormMascota.Nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FormMascota.Raza" class="control-label"></label>
+        <input asp-for="FormMascota.Raza" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FormMascota.Color" class="control-label"></label>
+        <input asp-for="FormMascota.Color" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FormMascota.FechaNacimiento" class="control-label"></label>
+        <input asp-for="FormMascota.FechaNacimiento" class="form-control" type="date" /> </br>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+
+</br></br></br>
+<h1 style="text-align: center;">Lista de Mascotas Registradas</h1>
+
+<table class="table table-dark" style="width: 100%; border-collapse: collapse; margin: auto;">
+    <thead>
+        <tr>
+            <th style="text-align: center;">Nombre</th>
+            <th style="text-align: center;">Raza</th>
+            <th style="text-align: center;">Color</th>
+            <th style="text-align: center;">Fecha de Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListMascota)
+        {
+            <tr>
+                <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Nombre)</td>
+                <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Raza)</td>
+                <td style="text-align: center;">@Html.DisplayFor(modelMascota => item.Color)</td>
+                <td style="text-align: center;">@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

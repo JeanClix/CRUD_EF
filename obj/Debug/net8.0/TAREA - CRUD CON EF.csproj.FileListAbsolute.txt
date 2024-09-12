@@ -137,3 +137,4 @@ C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.pdb
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.genruntimeconfig.cache
 C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\ref\TAREA - CRUD CON EF.dll
+C:\Users\jp100\Desktop\Estudio\USMP\6 CICLO\Programacion\TAREA - CRUD CON EF\obj\Debug\net8.0\TAREA - CRUD CON EF.sourcelink.json
