@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TAREA___CRUD_CON_EF.Data;
 using TAREA___CRUD_CON_EF.Models;
 using TAREA___CRUD_CON_EF.ViewModel;
-
 
 namespace TAREA___CRUD_CON_EF.Controllers
 {
@@ -25,38 +21,112 @@ namespace TAREA___CRUD_CON_EF.Controllers
 
         public IActionResult Index()
         {
-            var misMascotas = _context.Mascotas.ToList();
-            _logger.LogDebug("Mascotas: {misMascotas}", misMascotas);
             var viewModel = new MascotaVM
             {
                 FormMascota = new Mascota(),
-                ListMascota = misMascotas
+                ListMascota = _context.Mascotas.ToList()
             };
-            _logger.LogDebug("ViewModel: {viewModel}", viewModel);
+            ViewData["Accion"] = "Guardar";
+            ViewData["Color"] = "primary";
             return View(viewModel);
         }
 
         [HttpPost]
         public IActionResult Insertar(MascotaVM viewModel)
         {
-            var fechaNacimiento = viewModel.FormMascota.FechaNacimiento.ToUniversalTime();
-            var mascota = new Mascota
+            if (ModelState.IsValid)
             {
-                Nombre = viewModel.FormMascota.Nombre,
-                Raza = viewModel.FormMascota.Raza,
-                Color = viewModel.FormMascota.Color,
-                FechaNacimiento = fechaNacimiento
-            };
+                try
+                {
+                    _context.Mascotas.Add(viewModel.FormMascota);
+                    _context.SaveChanges();
+                    TempData["Message"] = "Mascota insertada con éxito";
+                    TempData["Color"] = "primary";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al insertar mascota");
+                    ModelState.AddModelError("", "Ocurrió un error al insertar la mascota.");
+                }
+            }
 
-            _context.Mascotas.Add(mascota);
-            _context.SaveChanges();
-
-            ViewData["Message"] = "Mascota Insertada con éxito";
-
-            var misMascotas = _context.Mascotas.ToList();
-            viewModel.ListMascota = misMascotas;
-
+            viewModel.ListMascota = _context.Mascotas.ToList();
+            ViewData["Accion"] = "Guardar";
             return View("Index", viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Editar(long id)
+        {
+            var mascota = _context.Mascotas.Find(id);
+            if (mascota == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MascotaVM
+            {
+                FormMascota = mascota,
+                ListMascota = _context.Mascotas.ToList()
+            };
+            ViewData["Accion"] = "Modificar";
+            ViewData["Color"] = "warning";
+            return View("Index", viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Modificar(MascotaVM viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var mascotaExistente = _context.Mascotas.Find(viewModel.FormMascota.Id);
+                    if (mascotaExistente != null)
+                    {
+                        _context.Entry(mascotaExistente).CurrentValues.SetValues(viewModel.FormMascota);
+                        _context.SaveChanges();
+                        TempData["Message"] = "Mascota modificada con éxito";
+                        TempData["Color"] = "warning";
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Mascota no encontrada");
+                        TempData["Color"] = "danger";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al modificar mascota");
+                    ModelState.AddModelError("", "Ocurrió un error al modificar la mascota.");
+                }
+            }
+
+            viewModel.ListMascota = _context.Mascotas.ToList();
+            ViewData["Accion"] = "Modificar";
+            return View("Index", viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Eliminar(long id)
+        {
+            var mascota = _context.Mascotas.Find(id);
+            if (mascota != null)
+            {
+                _context.Mascotas.Remove(mascota);
+                _context.SaveChanges();
+                TempData["Message"] = "Mascota eliminada con éxito";
+                TempData["Color"] = "danger";
+            }
+            else
+            {
+                TempData["Message"] = "Mascota no encontrada";
+                TempData["Color"] = "danger"; 
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -65,5 +135,4 @@ namespace TAREA___CRUD_CON_EF.Controllers
             return View("Error!");
         }
     }
-
 }
