@@ -6,7 +6,10 @@
 <div class="container">
     @if (TempData["Message"] != null)
     {
-        <h1 style="text-align: center; color: yellowgreen;">@TempData["Message"]</h1>
+        <div class="alert alert-@TempData["Color"] alert-dismissible fade show" role="alert">
+            <h1>@TempData["Message"]</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     }
     @if (!ViewData.ModelState.IsValid)
     {
@@ -24,7 +27,8 @@
         <!-- Primera Columna: Formulario -->
         <div class="col-md-4">
             <h1 style="text-align: center;">@ViewData["Accion"] Mascota</h1>
-            <form asp-controller="Mascota" asp-action="@(Model.FormMascota.Id == 0 ? "Insertar" : "Modificar")" method="post">
+            <form asp-controller="Mascota" asp-action="@(Model.FormMascota.Id == 0 ? "Insertar" : "Modificar")"
+                method="post">
                 <input type="hidden" asp-for="FormMascota.Id" />
                 <div class="form-group">
                     <label asp-for="FormMascota.Nombre" class="control-label"></label>
@@ -47,7 +51,7 @@
                     <span asp-validation-for="FormMascota.FechaNacimiento" class="text-danger"></span>
                 </div>
                 <div class="form-group d-grid gap-2 py-2">
-                    <button class="btn btn-primary" type="submit">@ViewData["Accion"]</button>
+                    <button class="btn btn-@ViewData["Color"]" type="submit">@ViewData["Accion"]</button>
                 </div>
             </form>
         </div>
@@ -90,5 +94,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

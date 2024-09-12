@@ -27,6 +27,7 @@ namespace TAREA___CRUD_CON_EF.Controllers
                 ListMascota = _context.Mascotas.ToList()
             };
             ViewData["Accion"] = "Guardar";
+            ViewData["Color"] = "primary";
             return View(viewModel);
         }
 
@@ -40,6 +41,7 @@ namespace TAREA___CRUD_CON_EF.Controllers
                     _context.Mascotas.Add(viewModel.FormMascota);
                     _context.SaveChanges();
                     TempData["Message"] = "Mascota insertada con éxito";
+                    TempData["Color"] = "primary";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
@@ -69,6 +71,7 @@ namespace TAREA___CRUD_CON_EF.Controllers
                 ListMascota = _context.Mascotas.ToList()
             };
             ViewData["Accion"] = "Modificar";
+            ViewData["Color"] = "warning";
             return View("Index", viewModel);
         }
 
@@ -85,11 +88,13 @@ namespace TAREA___CRUD_CON_EF.Controllers
                         _context.Entry(mascotaExistente).CurrentValues.SetValues(viewModel.FormMascota);
                         _context.SaveChanges();
                         TempData["Message"] = "Mascota modificada con éxito";
+                        TempData["Color"] = "warning";
                         return RedirectToAction(nameof(Index));
                     }
                     else
                     {
                         ModelState.AddModelError("", "Mascota no encontrada");
+                        TempData["Color"] = "danger";
                     }
                 }
                 catch (Exception ex)
@@ -113,10 +118,12 @@ namespace TAREA___CRUD_CON_EF.Controllers
                 _context.Mascotas.Remove(mascota);
                 _context.SaveChanges();
                 TempData["Message"] = "Mascota eliminada con éxito";
+                TempData["Color"] = "danger";
             }
             else
             {
                 TempData["Message"] = "Mascota no encontrada";
+                TempData["Color"] = "danger"; 
             }
 
             return RedirectToAction(nameof(Index));
