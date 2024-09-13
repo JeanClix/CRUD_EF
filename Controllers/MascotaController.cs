@@ -82,12 +82,13 @@ namespace TAREA___CRUD_CON_EF.Controllers
             {
                 try
                 {
+                    
                     var mascotaExistente = _context.Mascotas.Find(viewModel.FormMascota.Id);
                     if (mascotaExistente != null)
                     {
                         _context.Entry(mascotaExistente).CurrentValues.SetValues(viewModel.FormMascota);
                         _context.SaveChanges();
-                        TempData["Message"] = "Mascota modificada con éxito";
+                        TempData["Message"] = "Mascota '" +mascotaExistente.Id +"' modificada con éxito";
                         TempData["Color"] = "warning";
                         return RedirectToAction(nameof(Index));
                     }
@@ -117,7 +118,7 @@ namespace TAREA___CRUD_CON_EF.Controllers
             {
                 _context.Mascotas.Remove(mascota);
                 _context.SaveChanges();
-                TempData["Message"] = "Mascota eliminada con éxito";
+                TempData["Message"] = "Mascota "+mascota.Id+" eliminada con éxito";
                 TempData["Color"] = "danger";
             }
             else

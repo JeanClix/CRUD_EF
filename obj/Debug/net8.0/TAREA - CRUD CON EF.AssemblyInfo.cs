@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TAREA - CRUD CON EF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb14ad26ada11296e9ebcb26811a34d538e74384")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8864bc656fd572103d41211485f665fad8e6fb53")]
 [assembly: System.Reflection.AssemblyProductAttribute("TAREA - CRUD CON EF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TAREA - CRUD CON EF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
